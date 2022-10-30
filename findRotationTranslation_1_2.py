@@ -165,8 +165,6 @@ p2 = dst_pts.T[:, 0]
 print('result: ', np.round(p2.T @ F @ p1))
 
 # Find Essential Matrix from Fundamental Matrix
-print('K: ', K)
-
 EssentialMatrix = K.transpose() @ F @ K
 
 # peform svd on A and find the minimum value of |Af|
@@ -178,7 +176,14 @@ W = np.array([[0, 1, 0],
 RotationMatrix = U @ W @ VT 
 determinantR2 = np.linalg.det(RotationMatrix)
 if(determinantR2 > 0):
-    print('RotationMatrix:', RotationMatrix)
+    RotationMatrix_1_2 = RotationMatrix
 
 # translation t will be arbirtary magnitiude, we can only know the direction of t
-print('Translation up to scale:', U[:,2])
+translation_1_2 = np.reshape(U[:,2],(3,1))
+
+print(" 6 DOF pose estimation between img_1 and img_2")
+print("Rotation matrix:")
+print(RotationMatrix_1_2)
+print("Translation vector:")
+print(translation_1_2)
+

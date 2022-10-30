@@ -171,10 +171,16 @@ W = np.array([[0, 1, 0],
              [-1, 0, 0],
               [0, 0, 1]], dtype = "double")
 
-RotationMatrix = U @ W.transpose() @ VT 
+RotationMatrix = U @ W @ VT 
 determinantR2 = np.linalg.det(RotationMatrix)
 if(determinantR2 > 0):
-    print('RotationMatrix:', RotationMatrix)
+    RotationMatrix_1_3 = RotationMatrix
 
 # translation t will be arbirtary magnitiude, we can only know the direction of t
-print('Translation up to scale:', -U[:,2])
+translation_1_3 = np.reshape(-U[:,2],(3,1))
+
+print(" 6 DOF pose estimation between img_1 and img_3")
+print("Rotation matrix:")
+print(RotationMatrix_1_3)
+print("Translation vector:")
+print(translation_1_3)
